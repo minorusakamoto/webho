@@ -8,3 +8,10 @@
 * hook6
 * hook7
 * hook8
+* hook9
+* hook10
+* hook11
+* hook12
+* hook13
+* hook14
+* hook15
