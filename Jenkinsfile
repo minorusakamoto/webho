@@ -1,18 +1,18 @@
 pipeline {
     agent any
 
-    stage('Build') {
-        parallel master:{
-            node('master'){
-                steps {
-                    sh './gradlew tasks'
-                }
-            }
-        },
-        master2:{
-            node('master'){
-                steps {
-                    sh './gradlew -v'
+    stages {
+        node {
+            stage('Build') {
+                parallel master:{
+                    steps {
+                        sh './gradlew tasks'
+                    }
+                },
+                 master2:{
+                    steps {
+                        sh './gradlew -v'
+                    }
                 }
             }
         }
