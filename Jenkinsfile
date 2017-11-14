@@ -3,8 +3,19 @@ pipeline {
 
     stages {
         stage('Build') {
-            steps {
-                 sh './gradlew tasks'
+            parallel master:{
+                node('master'){
+                    steps {
+                        sh './gradlew tasks'
+                    }
+                }
+            },
+            master2:{
+                node('master'){
+                    steps {
+                        sh './gradlew -v'
+                    }
+                }
             }
         }
     }
