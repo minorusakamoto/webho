@@ -1,14 +1,23 @@
-node('master') {
+pipeline {
+    agent any
     stages {
         stage('Build') {
-            parallel master:{
-                steps {
-                    sh './gradlew tasks'
+            parallel {
+                stage('Tasks') {
+                    agent {
+                        label 'master'
+                    }
+                    steps {
+                        sh './gradlew tasks'
+                    }
                 }
-            },
-            master2:{
-                steps {
-                    sh './gradlew -v'
+                stage('Version') {
+                    agent {
+                        label 'master'
+                    }
+                    steps {
+                        sh './gradlew -v'
+                    }
                 }
             }
         }
