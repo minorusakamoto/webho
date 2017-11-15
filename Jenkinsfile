@@ -2,29 +2,22 @@ pipeline {
     agent any
     stages {
         stage('Build') {
-            agent {
-                label 'master'
-            }
-            steps {
-                echo 'Build'
-            }
-
-        }
-        parallel {
-            stage('Tasks') {
-                agent {
-                    label 'master'
+            parallel {
+                stage('Tasks') {
+                    agent {
+                        label 'master'
+                    }
+                    steps {
+                        sh './gradlew tasks'
+                    }
                 }
-                steps {
-                    sh './gradlew tasks'
-                }
-            }
-            stage('Version') {
-                agent {
-                    label 'master'
-                }
-                steps {
-                    sh './gradlew -v'
+                stage('Version') {
+                    agent {
+                        label 'master'
+                    }
+                    steps {
+                        sh './gradlew -v'
+                    }
                 }
             }
         }
