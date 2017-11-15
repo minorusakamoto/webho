@@ -1,46 +1,48 @@
 pipeline {
-    agent any
-    stages {
-        stage('Build') {
-            parallel {
-                stage('Tasks') {
-                    agent {
-                        label 'master'
+    timestamps {
+        agent any
+        stages {
+            stage('Build') {
+                parallel {
+                    stage('Tasks') {
+                        agent {
+                            label 'master'
+                        }
+                        steps {
+                            sh './gradlew tasks'
+                        }
                     }
-                    steps {
-                        sh './gradlew tasks'
+                    stage('Version') {
+                        agent {
+                            label 'master'
+                        }
+                        steps {
+                            sh './gradlew -v'
+                        }
                     }
-                }
-                stage('Version') {
-                    agent {
-                        label 'master'
+                    stage('echo') {
+                        agent {
+                            label 'master'
+                        }
+                        steps {
+                            echo 'ECHO'
+                        }
                     }
-                    steps {
-                        sh './gradlew -v'
+                    stage('ENV') {
+                        agent {
+                            label 'master'
+                        }
+                        steps {
+                            sh 'env'
+                        }
                     }
-                }
-                stage('echo') {
-                    agent {
-                        label 'master'
-                    }
-                    steps {
-                        echo 'ECHO'
-                    }
-                }
-                stage('ENV') {
-                    agent {
-                        label 'master'
-                    }
-                    steps {
-                        sh 'env'
-                    }
-                }
-                stage('ls') {
-                    agent {
-                        label 'master'
-                    }
-                    steps {
-                        sh 'ls -l'
+                    stage('ls') {
+                        agent {
+                            label 'master'
+                        }
+                        steps {
+                            sh 'ls -l'
+                        }
                     }
                 }
             }
