@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    node {
+      label 'master'
+    }
+    
+  }
   stages {
     stage('Build') {
       parallel {
@@ -37,6 +42,9 @@ pipeline {
         }
       }
     }
+  }
+  environment {
+    JAVA_HOME = '/opt/java/jdk1.8'
   }
   options {
     timestamps()
