@@ -5,14 +5,12 @@ pipeline {
     }
   }
   stages {
-    stage('Build') {
-      stage('Version') {
-        agent {
-          label 'master'
-        }
-        steps {
-          sh './gradlew -v'
-        }
+    stage('Version') {
+      agent {
+        label 'master'
+      }
+      steps {
+        sh './gradlew -v'
       }
     }
   }
