@@ -6,11 +6,9 @@ pipeline {
   }
   stages {
     stage('Version') {
-      agent {
-        label 'master'
-      }
       steps {
         sh './gradlew -v'
+        sh 'env'
       }
     }
   }
