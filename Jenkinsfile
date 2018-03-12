@@ -11,6 +11,11 @@ pipeline {
         sh 'env'
       }
     }
+    stage('env') {
+      steps {
+        sh "${env.CHANGE_ID}"
+      }
+    }
   }
   environment {
     JAVA_HOME = '/opt/java/jdk1.8'
