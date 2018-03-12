@@ -15,9 +15,8 @@ pipeline {
       when {
         allOf {
           expression { true };
-          environment name: 'CHANGE_ID', value: null
+          not {environment name: 'CHANGE_ID', value: null}
         }
-
       }
       steps {
         sh "echo ${env.CHANGE_ID}"
