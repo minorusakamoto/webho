@@ -13,9 +13,11 @@ pipeline {
     }
     stage('env') {
       when {
-        expression {
-           \$CHANGE_ID != null &&　\$CHANGE_ID != ""
+        allOf {
+          expression { true };
+          environment name: 'CHANGE_ID', value: null
         }
+
       }
       steps {
         sh "echo ${env.CHANGE_ID}"
