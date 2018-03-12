@@ -13,7 +13,7 @@ pipeline {
     }
     stage('env') {
       steps {
-        sh "${env.CHANGE_ID}"
+        sh "echo ${env.CHANGE_ID}"
       }
     }
   }
