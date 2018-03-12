@@ -14,7 +14,7 @@ pipeline {
     stage('env') {
       when {
         expression {
-           env.CHANGE_ID != null &&　env.CHANGE_ID != ""
+           ${CHANGE_ID} != null &&　${CHANGE_ID} != ""
         }
       }
       steps {
