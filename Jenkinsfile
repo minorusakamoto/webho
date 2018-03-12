@@ -6,11 +6,19 @@ pipeline {
   }
   stages {
     stage('Version') {
-      agent {
-        label 'master'
-      }
       steps {
         sh './gradlew -v'
+        sh 'env'
+      }
+    }
+    stage('env') {
+      when {
+        expression {
+          "${env.CHANGE_ID}" != null
+        }
+      }
+      steps {
+        sh "echo ${env.CHANGE_ID}"
       }
     }
   }
