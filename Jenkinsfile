@@ -11,10 +11,12 @@ pipeline {
         sh 'env'
       }
     }
-    stage('env') {
+    stage('Build') {
       when {
-        expression {
-           env.CHANGE_ID != null &&　env.CHANGE_ID != ""
+        allOf {
+          expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' };
+          expression { BRANCH_NAME ==~ /master/ };
+          environment name: 'CHANGE_ID', value: null
         }
       }
       steps {
