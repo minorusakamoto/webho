@@ -14,8 +14,8 @@ pipeline {
     stage('Build') {
       when {
         allOf {
-          expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' };
-          expression { BRANCH_NAME ==~ /master/ };
+          expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' }
+          expression { BRANCH_NAME ==~ /master/ }
           environment name: 'CHANGE_ID', value: null
         }
       }
